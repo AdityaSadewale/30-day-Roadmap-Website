@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 30-Day Challenge Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --glass:rgba(255,255,255,0.05);
+  --border:rgba(255,255,255,0.15);
+  --primary:#00ffd5;
+}
+
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:url("https://i.makeagif.com/media/4-30-2022/qGrLQA.gif") no-repeat center center fixed;
+  background-size:cover;
+  color:white;
+}
+
+.overlay{
+  background:rgba(0,0,0,0.5);
+  min-height:100vh;
+  padding:20px;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.header h2{
+  font-weight:700;
+  font-size:2rem;
+  text-shadow:1px 1px 8px rgba(0,0,0,0.6);
+}
+
+.countdown{
+  background:var(--glass);
+  backdrop-filter:blur(8px);
+  border:1px solid var(--border);
+  padding:8px 15px;
+  border-radius:12px;
+  font-size:14px;
+  text-align:center;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:20px;
+  margin-top:20px;
+}
+
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(10px);
+  border:1px solid var(--border);
+  padding:25px;
+  border-radius:25px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.5);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 15px 50px rgba(0,0,0,0.6);
+}
+
+textarea{
+  width:100%;
+  min-height:90px;
+  border-radius:12px;
+  border:none;
+  padding:12px;
+  margin-top:10px;
+  resize:none;
+  background:rgba(255,255,255,0.08);
+  color:white;
+}
+
+button{
+  background:var(--primary);
+  border:none;
+  padding:12px 20px;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:12px;
+  transition:0.3s;
+}
+
+button:hover{transform:scale(1.05);}
+
+.progress-bar{
+  height:12px;
+  background:rgba(255,255,255,0.2);
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:15px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.4) inset;
+}
+
+.progress{
+  height:100%;
+  width:0%;
+  background:var(--primary);
+  transition:0.5s;
+}
+
+.streak-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+  margin-top:10px;
+}
+
+.square{
+  width:100%;
+  padding-top:100%;
+  border-radius:6px;
+  position:relative;
+  transition:0.3s;
+  background:rgba(255,255,255,0.15);
+}
+
+.square.done{
+  animation:fillSquare 0.5s forwards;
+}
+
+@keyframes fillSquare{
+  0%{transform:scale(0); opacity:0;}
+  100%{transform:scale(1); opacity:1;}
+}
+
+.timeline{
+  margin-top:15px;
+  max-height:250px;
+  overflow-y:auto;
+  font-size:13px;
+}
+
+.timeline-item{
+  margin-bottom:10px;
+  padding:10px;
+  background:rgba(255,255,255,0.08);
+  border-left:3px solid var(--primary);
+  border-radius:8px;
+}
+
+/* Celebration Popup */
+#popup{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  background:rgba(0,0,0,0.85);
+  padding:30px 50px;
+  border-radius:20px;
+  text-align:center;
+  font-size:24px;
+  color:#00ff7f;
+  z-index:100;
+  box-shadow:0 10px 50px rgba(0,0,0,0.7);
+  transition:0.5s;
+}
+#popup.show{transform:translate(-50%,-50%) scale(1);}
+
+/* Confetti */
+@keyframes confetti{
+  0%{transform:translateY(0) rotate(0deg);}
+  100%{transform:translateY(600px) rotate(360deg);}
+}
+
+.confetti{
+  position:fixed;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  animation:confetti 1s linear forwards;
+  z-index:50;
+}
+
+@media(max-width:768px){
+  .grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div id="popup">🎉 Day Completed! +10 Points!</div>
+
+<div class="overlay">
+<div class="container">
+
+<div class="header">
+<h2>🚀 AI 30-Day Challenge</h2>
+<div class="countdown" id="countdown">Loading...</div>
+</div>
+
+<div class="grid">
+
+<div>
+<div class="card">
+  <h3>📘 What Should I Learn Today?</h3>
+  <h4 id="dayTitle">Day 1</h4>
+  <p id="taskTitle"></p>
+</div>
+
+<div class="card" style="margin-top:20px;">
+<h3>✍ What Did You Learn Today?</h3>
+<textarea id="noteInput" placeholder="Write what you learned today..."></textarea>
+<button onclick="completeDay()">Complete Day ✅</button>
+<div class="progress-bar"><div class="progress" id="progressBar"></div></div>
+</div>
+</div>
+
+<div class="card">
+<h3>📊 Stats</h3>
+⭐ Points: <span id="points">0</span><br>
+🔥 Streak: <span id="streak">0</span><br>
+🏆 Level: <span id="level">Beginner</span>
+
+<h4>📅 30-Day Streak</h4>
+<div class="streak-grid" id="streakGrid"></div>
+
+<h4>📘 Learning Timeline</h4>
+<div class="timeline" id="timeline"></div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+// ✅ RESET EVERYTHING TO ZERO
+localStorage.clear();
+
+// ===== TASK LIST =====
+const tasks=[
+"Learn Variables & Data Types","Strings & Formatting","Lists and Indexing","If-Else Conditions",
+"Loops Practice","Functions","Mini Project","NumPy Basics","Pandas Basics","Data Cleaning",
+"Visualization","ML Introduction","Linear Regression","Classification","ML Mini Project",
+"Start Final Project","Improve Project","Deploy Project","Build UI","Add API","Optimize Code",
+"Deep Learning Intro","Neural Networks","CNN Basics","NLP Basics","Build Chatbot","Portfolio Polish",
+"Resume Update","Mock Interview","Final Review"
+];
+
+// ===== VARIABLES =====
+let day = 0; 
+let points = 0; 
+let streak = 0; 
+let history = []; 
+let notes = {}; 
+let lastCompleted = null; 
+
+function initGrid(){
+  const grid=document.getElementById("streakGrid");
+  grid.innerHTML="";
+  for(let i=0;i<30;i++){
+    const sq=document.createElement("div");
+    sq.className="square";
+    if(history.includes(i)) sq.classList.add("done");
+    sq.style.background=history.includes(i) ? `hsl(${i*12},100%,50%)` : 'rgba(255,255,255,0.15)';
+    grid.appendChild(sq);
+  }
+}
+
+function updateUI(){
+  document.getElementById("dayTitle").innerText="Day "+(day+1);
+  document.getElementById("taskTitle").innerText=tasks[day];
+  document.getElementById("points").innerText=points;
+  document.getElementById("streak").innerText=streak;
+
+  let level="Beginner";
+  if(points>=100) level="Intermediate";
+  if(points>=200) level="Advanced";
+  document.getElementById("level").innerText=level;
+
+  document.getElementById("progressBar").style.width=((day+1)/30)*100+"%";
+  renderTimeline();
+}
+
+function renderTimeline(){
+  const box=document.getElementById("timeline");
+  box.innerHTML="";
+  for(let i=0;i<30;i++){
+    if(notes[i]){
+      box.innerHTML+=`<div class="timeline-item"><strong>Day ${i+1}:</strong> ${notes[i]}</div>`;
+    }
+  }
+}
+
+function completeDay(){
+  const note=document.getElementById("noteInput").value.trim();
+  if(note===""){ alert("⚠ Please write what you learned!"); return; }
+
+  let today = new Date().toDateString();
+  if(lastCompleted === today){
+    alert("✅ You have already completed today's task!");
+    return;
+  }
+
+  points+=10;
+  streak++;
+  history.push(day);
+  notes[day]=note;
+  lastCompleted = today;
+
+  document.getElementById("noteInput").value="";
+  if(day<29) day++;
+
+  saveData();
+  initGrid();
+  updateUI();
+  showPopup(`🎉 Day Completed! +10 Points!`);
+  triggerConfetti();
+
+  if(history.length===30) fullCelebration();
+}
+
+function saveData(){
+  localStorage.setItem("day",day);
+  localStorage.setItem("points",points);
+  localStorage.setItem("streak",streak);
+  localStorage.setItem("history",JSON.stringify(history));
+  localStorage.setItem("notes",JSON.stringify(notes));
+  localStorage.setItem("lastCompleted",lastCompleted);
+}
+
+function countdown(){
+  const now=new Date().getTime();
+  const end=now + 30*24*60*60*1000; // 30 days
+  const dist=end-now;
+  const d=Math.floor(dist/(1000*60*60*24));
+  const h=Math.floor((dist%(1000*60*60*24))/(1000*60*60));
+  document.getElementById("countdown").innerText="⏳ "+d+"d "+h+"h left";
+}
+
+function showPopup(msg){
+  const popup = document.getElementById("popup");
+  popup.innerText = msg;
+  popup.classList.add("show");
+  setTimeout(()=> popup.classList.remove("show"),2500);
+}
+
+function triggerConfetti(){
+  for(let i=0;i<50;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*window.innerWidth+"px";
+    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    c.style.animationDuration=(0.5+Math.random())+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),1500);
+  }
+}
+
+function fullCelebration(){
+  showPopup("🏆 Congratulations! You completed 30 Days! 🎉");
+  for(let i=0;i<100;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*window.innerWidth+"px";
+    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    c.style.width="15px";
+    c.style.height="15px";
+    c.style.animationDuration=(0.5+Math.random())+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),5000);
+  }
+}
+
+// ===== INITIALIZE =====
+initGrid();
+updateUI();
+setInterval(countdown,1000);
+</script>
+</body>
+</html>

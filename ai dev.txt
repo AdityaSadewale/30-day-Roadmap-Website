@@ -1,0 +1,180 @@
+🚀 30-Day AI Developer Plan (Beginner)
+🗓 WEEK 1 — Python Basics
+✅ Day 1
+
+Install Python or use Google Colab
+
+Learn: print(), variables, data types
+
+✅ Day 2
+
+Strings
+
+Input/output
+
+Basic math operations
+
+✅ Day 3
+
+Lists
+
+Tuples
+
+Dictionaries
+
+✅ Day 4
+
+If-else
+
+Logical operators
+
+✅ Day 5
+
+Loops (for, while)
+
+✅ Day 6
+
+Functions
+
+Return values
+
+✅ Day 7
+
+🔥 Mini Project:
+
+Build a calculator
+
+Build number guessing game
+
+👉 Goal: You can write small programs without copying.
+
+🗓 WEEK 2 — Python for Data (AI Foundation)
+✅ Day 8
+
+Install & learn:
+
+NumPy
+
+Arrays, operations
+
+✅ Day 9
+
+NumPy practice problems
+
+✅ Day 10
+
+Install:
+
+Pandas
+
+DataFrames
+
+Read CSV files
+
+✅ Day 11
+
+Data cleaning
+
+Filtering data
+
+✅ Day 12
+
+Install:
+
+Matplotlib
+
+Plot graphs
+
+✅ Day 13
+
+Practice with real dataset
+
+✅ Day 14
+
+🔥 Mini Project:
+
+Load dataset
+
+Clean it
+
+Show graphs
+
+👉 Goal: You understand how AI reads data.
+
+🗓 WEEK 3 — Machine Learning
+✅ Day 15
+
+What is Machine Learning?
+
+Supervised learning
+
+✅ Day 16
+
+Install:
+
+Scikit-learn
+
+Train first model (Linear Regression)
+
+✅ Day 17
+
+Classification models
+
+✅ Day 18
+
+Train spam classifier
+
+✅ Day 19
+
+Train house price predictor
+
+✅ Day 20
+
+Model evaluation (accuracy, train/test split)
+
+✅ Day 21
+
+🔥 Mini Project:
+
+Build student marks predictor
+
+👉 Goal: You trained real AI models.
+
+🗓 WEEK 4 — Build Your First AI Project
+
+Choose ONE:
+
+Option 1 — Movie Recommendation System
+Option 2 — Spam Email Classifier App
+Option 3 — Simple Chatbot
+Option 4 — Image Classifier
+✅ Day 22–25
+
+Build model
+
+Improve accuracy
+
+Clean code
+
+✅ Day 26–27
+
+(Optional Deep Learning intro)
+
+Install TensorFlow
+OR
+
+Install PyTorch
+
+✅ Day 28–29
+
+Improve project
+
+Add user input
+
+✅ Day 30
+
+🔥 Upload project to GitHub
+
+Learn Git basics
+
+Push your code
