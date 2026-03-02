@@ -51,4 +51,5 @@ This website breaks down goals and daily tasks so you can stay focused and track
 ⭐ Add daily checkboxes or progress tracking
 
 📬 Feedback & Contact
-Created by Aditya Sadewale
+Created by 
+Aditya Sadewale
