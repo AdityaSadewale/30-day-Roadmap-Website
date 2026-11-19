@@ -2,6 +2,7 @@
 🗓 WEEK 1 — Python Basics
 ✅ Day 1
 
+
 Install Python or use Google Colab
 
 Learn: print(), variables, data types
