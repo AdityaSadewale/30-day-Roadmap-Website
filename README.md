@@ -3,7 +3,6 @@
 A simple, responsive web project that visually presents a **30-day learning roadmap** to help beginners dive into web development, AI, or programming fundamentals.
 
 This website breaks down goals and daily tasks so you can stay focused and track your progress throughout a 30-day challenge.
-
 ---
 
 ## 🌟 Features
