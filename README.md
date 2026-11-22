@@ -16,6 +16,7 @@ This website breaks down goals and daily tasks so you can stay focused and track
 
 ## 📌 Roadmap Overview
 
+
 > You can customize this section to reflect what your specific 30-day plan covers (e.g., Web Development, AI/ML, Git & GitHub basics, Python, Frontend, Backend).
 
 **Example Breakdown (editable):**
