@@ -4,7 +4,6 @@ A simple, responsive web project that visually presents a **30-day learning road
 
 This website breaks down goals and daily tasks so you can stay focused and track your progress throughout a 30-day challenge.
 ---
-
 ## 🌟 Features
 
 ✔ Day-by-day roadmap overview  
